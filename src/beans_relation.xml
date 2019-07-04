@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        继承了包括class内的属性
+        继承不继承abstract autowire等属性
+        可以覆写继承的属性
+        abstract = false 则 address也会被实例化
+     -->
+    <bean id="address" class="org.zmxka.auto.Address" p:city="BeiJing"
+    p:street="XiDaJie" />
+
+    <bean id="address2" p:city="YuLing" parent="address"/>
+
+    <bean id="address3" p:city="WuHan" parent="address2"/>
+
+
+    <!--
+        如果abstract = true 则 address不会被实例化
+        此时他仅仅作为一个父模板甚至可以没有class
+        此时子bean必须有class
+        可能会报Attribute p:city is not allowed here但是可以正常变异执行
+
+    <bean id="address4"  p:city="BeiJin223"
+          p:street="XiDaJie332" abstract="true" />
+
+    <bean id="address5" class="org.zmxka.auto.Address" parent="address4"/>
+    -->
+
+
+    <!--表示在person bean的bean文件下必须要有 bean car的实例存在 可以没有引用关系-->
+
+    <bean id="car" class="com.zmxka.bean.Car" p:name="aodi"
+          p:price="2000"/>
+
+    <bean id="person" class="org.zmxka.auto.Person" p:name="zhou34"
+          p:address-ref="address2" depends-on="car"/>
+
+</beans>

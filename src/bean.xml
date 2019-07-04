@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--属性注入 value标签赋值-->
+    <bean id="car" class="com.zmxka.bean.Car">
+        <property name="name">
+            <value>zhou222</value>
+        </property>
+        <property name="corp" value="lei"/>
+        <property name="price" value="3000000"/>
+        <property name="speed" value="180"/>
+    </bean>
+    <!--构造器注入 index-->
+    <bean id="car2" class="com.zmxka.bean.Car">
+        <constructor-arg value="zhou2" index="0"/>
+        <constructor-arg value="lei2" index="1"/>
+        <constructor-arg value="4000000" type="int"/>
+    </bean>
+    <!--构造器注入 type 特殊字符 <value>可以写成标签-->
+    <bean id="car3" class="com.zmxka.bean.Car">
+        <constructor-arg value="zhou3" type="java.lang.String"/>
+        <constructor-arg  type="java.lang.String">
+            <value><![CDATA[<lei3>^]]></value>
+        </constructor-arg>
+        <constructor-arg value="160" type="double"/>
+    </bean>
+    <!--引用其他bean 级联属性赋值(需要对象本身不为null) 赋值null-->
+    <bean id="preson" class="com.zmxka.bean.Preson">
+        <property name="name" value="liu"/>
+        <property name="age" value="18"/>
+        <property name="car" ref="car2"/>
+        <property name="car.price" value="500000"/>
+        <!--<property name="car"><null/></property>-->
+    </bean>
+    <!--内部bean-->
+    <bean id="preson2" class="com.zmxka.bean.Preson">
+        <property name="name" value="liu"/>
+        <property name="age" value="18"/>
+        <property name="car">
+            <bean class="com.zmxka.bean.Car">
+                <property name="name" value="zhou4"/>
+                <property name="corp" value="lei4"/>
+                <property name="price" value="3000000"/>
+                <property name="speed" value="1800"/>
+            </bean>
+        </property>
+    </bean>
+    <!--list-->
+    <bean id="car4" class="cn.zmxka.list.Car">
+        <property name="name" value="zhou"/>
+        <property name="corp" value="lei"/>
+        <property name="price" value="3000000"/>
+        <property name="speed" value="180"/>
+    </bean>
+
+    <bean id="car5" class="cn.zmxka.list.Car">
+        <constructor-arg value="zhou2" index="0"/>
+        <constructor-arg value="lei2" index="1"/>
+        <constructor-arg value="4000000" type="int"/>
+    </bean>
+
+    <bean id="car6" class="cn.zmxka.list.Car">
+        <constructor-arg value="zhou3" type="java.lang.String"/>
+        <constructor-arg  type="java.lang.String">
+            <value><![CDATA[<lei3>^]]></value>
+        </constructor-arg>
+        <constructor-arg value="160" type="double"/>
+    </bean>
+
+    <bean id="preson3" class="cn.zmxka.list.Preson">
+        <property name="name" value="zhou"/>
+        <property name="age" value="24"/>
+        <property name="carList">
+            <list>
+                <ref bean="car4"/>
+                <ref bean="car5"/>
+                <bean class="cn.zmxka.list.Car">
+                    <constructor-arg value="zhou3" type="java.lang.String"/>
+                    <constructor-arg  type="java.lang.String">
+                        <value><![CDATA[<lei3>^]]></value>
+                    </constructor-arg>
+                    <constructor-arg value="1600" type="double"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--Map-->
+
+    <bean id="newPreson" class="cn.zmxka.list.NewPreson">
+        <constructor-arg value="zhou"/>
+        <constructor-arg value="18"/>
+        <constructor-arg>
+            <map>
+                <entry key="AA" value-ref="car4"/>
+                <entry key="BB" value-ref="car5"/>
+                <entry key="CC">
+                    <bean class="cn.zmxka.list.Car">
+                        <constructor-arg value="zhou3" type="java.lang.String"/>
+                        <constructor-arg  type="java.lang.String">
+                            <value><![CDATA[<lei3>^]]></value>
+                        </constructor-arg>
+                        <constructor-arg value="1600" type="double"/>
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!--Properties-->
+
+    <bean id="dataSource" class="com.zmxka.bean.DataSource">
+        <property name="properties">
+            <props>
+                <prop key="user">root</prop>
+                <prop key="password">123456</prop>
+                <prop key="jdbcUrl">jdbc:mysql</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--配置独立集合bean 多个bean应用 导入util命名空间-->
+    <util:list id="cars">
+        <ref bean="car4"/>
+        <ref bean="car5"/>
+        <ref bean="car6"/>
+    </util:list>
+
+    <bean id="preson4" class="cn.zmxka.list.Preson">
+        <property name="age" value="188"/>
+        <property name="name" value="zhou"/>
+        <property name="carList" ref="cars"/>
+    </bean>
+
+    <!--P命名空间-->
+    <bean id="preson5" class="com.zmxka.bean.Preson " p:age="30" p:name="zhouzhou"
+          p:car-ref="car"/>
+
+</beans>

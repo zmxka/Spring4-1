@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="org.zmxka.auto.Address"
+    p:city="Beijing" p:street="HuiLongGuan"/>
+
+    <bean id="car" class="com.zmxka.bean.Car"
+    p:name="BC" p:corp="shanghai" p:price="3000222" p:speed="130"/>
+
+    <bean id="person" class="org.zmxka.auto.Person"
+    p:name="Zhou" p:address-ref="address" p:car-ref="car"/>
+
+    <!--自动装配
+        byName 需要bean的id与person的setter方法的属性名相同
+        byType 如果有来个或以上的相同类型的bean抛异常
+
+        自动装配不能匹配部分属性，不能二者共用，一般开发使用较少
+    -->
+
+    <bean id="person2" class="org.zmxka.auto.Person"
+          p:name="Zhou2" autowire="byName"/>
+
+    <bean id="person3" class="org.zmxka.auto.Person"
+          p:name="Zhou3" autowire="byType"/>
+
+</beans>
