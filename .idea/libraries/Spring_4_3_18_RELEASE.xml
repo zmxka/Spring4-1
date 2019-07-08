@@ -20,6 +20,9 @@
       <root url="jar://$PROJECT_DIR$/lib/spring-test-4.3.18.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-jdbc-4.3.18.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-tx-4.3.18.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/工具/spring/c3p0-0.9.5.4.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/工具/spring/mysql-connector-java-8.0.16.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/工具/spring/mchange-commons-java-0.2.16.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

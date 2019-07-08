@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置静态工厂方法来配置 Car 而不是 StaticCarFactory-->
+    <!--
+        class属性指向静态工厂方法的全类名
+        factory指向静态方法名
+        constructor-arg 传入方法参数
+    -->
+    <bean id="car1" class="factory.zmxka.factory.StaticCarFactory"
+    factory-method="getCar">
+        <constructor-arg value="audi"/>
+    </bean>
+
+    <!--配置工厂实例-->
+    <bean id="instanceCarFactory" class="factory.zmxka.factory.InstanceCarFactory"/>
+    <!--主要是实例方法需要实例化所以先配置bean,静态方法直接调用不需要配置bean-->
+    <bean id="car2" factory-bean="instanceCarFactory" factory-method="getCar">
+        <constructor-arg value="audi"/>
+    </bean>
+
+    <!--实现FactoryBean接口 配置bean
+         public Car getObject()
+         public Class<?> getObjectType()
+         public boolean isSingleton()
+         实现以上三个方法详见FactoryBeanImpl
+         实例返回的实例为 public Car getObject()返回的实例
+    -->
+    <bean id="car3" class="factory.zmxka.factory.FactoryBeanImpl">
+        <property name="name" value="BMW"/>
+    </bean>
+</beans>

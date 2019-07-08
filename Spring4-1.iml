@@ -5,6 +5,12 @@
       <configuration>
         <fileset id="fileset" name="Bean" removed="false">
           <file>file://$MODULE_DIR$/src/bean.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_spel.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_cycle.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_Processor.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_factory.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_annotation.xml</file>
+          <file>file://$MODULE_DIR$/src/beans_gengric.xml</file>
         </fileset>
         <fileset id="fileset2" name="Beans_auto" removed="false">
           <file>file://$MODULE_DIR$/src/beans_auto.xml</file>
@@ -14,6 +20,9 @@
         </fileset>
         <fileset id="fileset4" name="Bean_scope" removed="false">
           <file>file://$MODULE_DIR$/src/bean_scope.xml</file>
+        </fileset>
+        <fileset id="fileset5" name="Beans_properties" removed="false">
+          <file>file://$MODULE_DIR$/src/beans_properties.xml</file>
         </fileset>
       </configuration>
     </facet>

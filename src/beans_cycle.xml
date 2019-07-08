@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="car" class="life.zmxka.cycle.Car"
+        init-method="init" destroy-method="destory">
+        <property name="brand" value="Audi"/>
+    </bean>
+
+    <!--配置bean的后置处理器
+        IOC自动识别 无需ID bean后置处理器
+        实现BeanPostProcessor接口
+        public Object postProcessBeforeInitialization(Object bean, String beanName) init之前
+        public Object postProcessAfterInitialization(Object bean, String beanName) init之后
+        对所有bean生效一般需要在 BeanPostProcessorImpl 中判断bean名称
+        返回值bean可以在方法中修改返回的bean,甚至返回一个新的bean
+    -->
+    <bean class="life.zmxka.cycle.BeanPostProcessorImpl"/>
+</beans>
